@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec2 vTexCoord;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+varying vec2 fTexCoord;
+
+void main()
+{
+    gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+    fTexCoord = vTexCoord;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+varying vec4 fColor;
+varying  vec2 fTexCoord;
+uniform sampler2D Tex0;
+uniform sampler2D Tex1;
+
+
+void main()
+{
+    gl_FragColor = vec4(0.300,0.165,0.032, 1.0)*(texture2D(Tex0, fTexCoord)*texture2D(Tex1, fTexCoord));;
+
+
+}
+</script>
+
+
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/InitShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="Homework2.js"></script>
+
+<div>
+
+<button id = "Animate">Animation On/Off</button>
+
+</div>
+
+
+<body>
+<canvas id="gl-canvas" width="2048" height="2048">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
